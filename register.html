@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - Hostel Escape</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .bg-image {
+            background-image: url('1000137540.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .overlay {
+            min-height: 100vh;
+            width: 100%;
+            background-color: rgba(0, 20, 50, 0.45); 
+            padding: 40px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-container {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 750px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-header {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            color: #001432;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0d6efd;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            border-left: 3px solid #0d6efd;
+            padding-left: 8px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 13.5px;
+            margin-bottom: 4px;
+        }
+
+        .form-control, .form-select {
+            border: 1px solid #ced4da;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+        }
+
+        .btn-register {
+            background-color: #0d6efd;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-register:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-1px);
+        }
+
+        .login-link a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image"></div>
+
+    <div class="overlay">
+        <div class="register-container">
+            
+            <div class="form-header text-center">
+                <h2 class="fw-bold mb-1"><i class="bi bi-person-plus-fill text-primary me-2"></i>Student Registration</h2>
+                <p class="text-muted small mb-0">Create your portal account for GWP Bokaro Hostel</p>
+            </div>
+
+            <form id="regForm">
+                
+                <div class="section-title">Academic Details</div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Branch</label>
+                        <select id="branch" class="form-select" required>
+                            <option value="" selected disabled>Select your branch</option>
+                            <option value="CSE">Computer Science Engineering</option>
+                            <option value="ECE">Electronics & Communication</option>
+                            <option value="EE">Electrical Engineering</option>
+                            
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Roll Number</label>
+                        <input type="text" id="rollNo" class="form-control" placeholder="Roll number" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Registration Number</label>
+                        <input type="text" id="regNo" class="form-control" placeholder="Registration number" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Aadhar Number</label>
+                        <input type="text" id="aadharNo" class="form-control" pattern="\d{12}" maxlength="12" placeholder="12-digit Aadhar" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Semester</label>
+                        <select id="semester" class="form-select" required>
+                            <option value="" selected disabled>Choose...</option>
+                            <option value="1">1st Sem</option>
+                            <option value="2">2nd Sem</option>
+                            <option value="3">3rd Sem</option>
+                            <option value="4">4th Sem</option>
+                            <option value="5">5th Sem</option>
+                            <option value="6">6th Sem</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Session</label>
+                        <input type="text" id="session" class="form-control" placeholder="e.g., 2024-27" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Room Number</label>
+                        <input type="text" id="roomNo" class="form-control" placeholder="e.g., 102-A" required>
+                    </div>
+                </div>
+
+                <div class="section-title">Guardian & Contact Details</div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Parent / Guardian Name</label>
+                        <input type="text" id="parentName" class="form-control" placeholder="Enter father/mother name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Parent Mobile Number</label>
+                        <input type="text" id="parentMobile" class="form-control" pattern="\d{10}" maxlength="10" placeholder="10-digit parent number" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Student Mobile Number</label>
+                        <input type="text" id="mobileNumber" class="form-control" pattern="\d{10}" maxlength="10" placeholder="10-digit student number" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="name@email.com" required>
+                    </div>
+                </div>
+
+                <div class="section-title">Credentials</div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Create Password</label>
+                        <input type="password" class="form-control" id="pass" placeholder="Minimum 6 characters" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confPass" placeholder="Repeat password" required>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-register shadow-sm">
+                        <i class="bi bi-clipboard-check me-2"></i>Register Account
+                    </button>
+                </div>
+            </form>
+            <p class="login-link text-center mt-3 small text-muted mb-0">
+                Already have an account? <a href="login.html">Login here</a>
+            </p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.getElementById('regForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const pass = document.getElementById('pass').value;
+            const confPass = document.getElementById('confPass').value;
+            
+            if(pass !== confPass) {
+                alert("Passwords do not match! Please check again.");
+                return;
+            }
+
+            // Collecting data using dynamic object mapping
+            const studentData = {
+                fullName: document.getElementById('fullName').value,
+                branch: document.getElementById('branch').value,
+                rollNo: document.getElementById('rollNo').value,
+                regNo: document.getElementById('regNo').value,
+                aadharNo: document.getElementById('aadharNo').value,
+                semester: document.getElementById('semester').value,
+                session: document.getElementById('session').value,
+                roomNo: document.getElementById('roomNo').value,
+                parentName: document.getElementById('parentName').value,       // Added
+                parentMobile: document.getElementById('parentMobile').value,   // Added
+                mobileNumber: document.getElementById('mobileNumber').value,
+                email: document.getElementById('email').value,
+                password: pass
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(studentData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Registration Successful! Redirecting to login page.');
+                    window.location.href = 'login.html';
+                } else {
+                    alert('Registration Failed: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Server se connect nahi ho pa raha hai.');
+            }
+        });
+    </script>
+    <script>
+document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault(); 
+
+    // फॉर्म से डेटा कलेक्ट करना
+    const formData = {
+        fullName: document.querySelector('input[placeholder*="Name"]')?.value || document.querySelector('#fullName')?.value || "Test Name",
+        email: document.querySelector('input[type="email"]')?.value || "test@gmail.com",
+        password: document.querySelector('input[type="password"]')?.value || "123456"
+    };
+
+    try {
+        // सर्वर (Port 5000) पर डेटा भेजना
+        const response = await fetch('http://localhost:5000/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(result.message); 
+            window.location.href = 'login.html'; // सफल होने पर लॉगिन पेज पर भेजें
+        } else {
+            alert('Registration Failed: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Server से कनेक्ट नहीं हो पा रहा है। कृपया सुनिश्चित करें कि सर्वर चल रहा है।');
+    }
+});
+</script>
+</body>
+</html>
