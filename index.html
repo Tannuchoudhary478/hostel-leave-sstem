@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Leave Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Background Image */
+        .bg-image {
+            background-image: url('1000137540.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Background overlay tint */
+        .overlay {
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 20, 50, 0.4); 
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 8%;
+        }
+
+        /* Glassmorphic Sidebar Card */
+        .content-box {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 40px;
+            border-radius: 16px;
+            color: white;
+            max-width: 480px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .system-title {
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .btn-custom-get {
+            background-color: #0d6efd;
+            border: none;
+            padding: 12px 28px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-custom-get:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-2px);
+        }
+
+        .btn-custom-login {
+            background-color: transparent;
+            border: 2px solid white;
+            padding: 12px 28px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-custom-login:hover {
+            background-color: white;
+            color: #001432;
+            transform: translateY(-2px);
+        }
+
+        /* Portal Selection Glass Modal Styling */
+        .glass-modal-content {
+            background: rgba(255, 255, 255, 0.18) !important;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 24px !important;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .role-btn {
+            padding: 14px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            border: none;
+            color: white !important;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .role-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            opacity: 0.95;
+        }
+
+        .footer-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 28, 68, 0.95);
+            color: white;
+            padding: 12px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image"></div>
+
+    <div class="overlay">
+        <div class="content-box">
+            <h6 class="text-info fw-bold mb-1">GOVERNMENT WOMEN'S POLYTECHNIC, BOKARO</h6>
+            <h1 class="display-6 system-title mb-3">Hostel Leave<br><span class="text-info">Management System</span></h1>
+            <p class="fs-6 mb-4">Apply. Track. Relax. We've got it managed. Empowering students with a smarter hostel leave experience.</p>
+            
+            <div class="mb-4">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check-circle-fill text-info me-2"></i> Easy Application
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-clock-history text-info me-2"></i> Real-time Tracking
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-shield-lock-fill text-info me-2"></i> Secure & Reliable
+                </div>
+            </div>
+
+            <div class="d-flex gap-3">
+                <a href="register.html" class="btn btn-custom-get rounded-pill shadow">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>GET STARTED
+                </a>
+                <button class="btn btn-custom-login rounded-pill" data-bs-toggle="modal" data-bs-target="#loginRoleModal">
+                    <i class="bi bi-person-fill me-2"></i>LOGIN ID
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginRoleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="loginRoleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-modal-content p-4">
+                <div class="modal-body text-center">
+                    <h3 class="fw-bold mb-1">Welcome to Hostel Escape 😎</h3>
+                    <p class="text-light small mb-4">Select an action to continue</p>
+                    
+                    <div class="d-flex flex-column gap-3 px-2">
+                        <a href="login.html" class="btn role-btn" style="background-color: #00bcd4;">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Student Login
+                        </a>
+
+                        <a href="register.html" class="btn role-btn" style="background-color: #ff9800;">
+                            <i class="bi bi-person-plus-fill me-2"></i>Student Registration
+                        </a>
+                        
+                        <a href="warden-dashboard.html" class="btn role-btn" style="background-color: #4caf50;">
+                            <i class="bi bi-shield-lock me-2"></i>Warden Portal
+                        </a>
+                    </div>
+                    
+                    <button type="button" class="btn btn-link text-white mt-4 text-decoration-none small" data-bs-dismiss="modal">
+                        <i class="bi bi-arrow-left me-1"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bar text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"><i class="bi bi-geo-alt-fill text-info"></i> GWP Bokaro Hostel</div>
+                <div class="col-md-4"><i class="bi bi-shield-check text-info"></i> Safe Stay, Happy Learning</div>
+                <div class="col-md-4"><i class="bi bi-book text-info"></i> Focus On Studies, We Care For The Rest</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
