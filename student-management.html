@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management - GWP Bokaro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        body, html {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('1000137540.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .overlay {
+            min-height: 100vh;
+            width: 100%;
+            background-color: rgba(0, 20, 50, 0.45); 
+            padding: 30px 20px;
+        }
+
+        .navbar-custom {
+            background: rgba(0, 28, 68, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .management-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+
+        /* Session Select Box Style */
+        .session-box {
+            max-width: 200px;
+            font-weight: 600;
+            border: 2px solid #0d6efd;
+            color: #001432;
+        }
+
+        /* Custom Hostel Tabs Styling */
+        .nav-pills .nav-link {
+            color: #001432;
+            font-weight: 600;
+            border: 1px solid #ced4da;
+            margin-right: 8px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #0d6efd !important;
+            color: white;
+            border-color: #0d6efd;
+        }
+
+        .table th {
+            background-color: #001432 !important;
+            color: white !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .table td {
+            padding: 12px;
+            vertical-align: middle;
+        }
+
+        .status-in { background-color: #d1e7dd; color: #0f5132; font-weight: bold; }
+        .status-out { background-color: #f8d7da; color: #842029; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="overlay">
+        <div class="container-fluid">
+            
+            <div class="navbar-custom">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-building-gear text-info fs-3 me-2"></i>
+                    <div>
+                        <h5 class="mb-0 fw-bold">Student Management</h5>
+                        <small class="text-info">GWP Bokaro Hostel Directory</small>
+                    </div>
+                </div>
+                <div>
+                    <a href="warden-dashboard.html" class="btn btn-outline-light btn-sm rounded-pill px-3 me-2">
+                        <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                    </a>
+                    <a href="index.html" class="btn btn-danger btn-sm rounded-pill px-3">Logout</a>
+                </div>
+            </div>
+
+            <div class="management-container">
+                
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <h4 class="fw-bold text-dark mb-0"><i class="bi bi-person-lines-fill text-primary me-2"></i>Records</h4>
+                        
+                        <select class="form-select form-select-sm session-box rounded-pill px-3" id="sessionFilter">
+                            <option value="2024-27" selected>Session: 2024-27</option>
+                            <option value="2025-28">Session: 2025-28</option>
+                            <option value="2026-29">Session: 2026-29</option>
+                        </select>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <input type="text" class="form-control form-control-sm" placeholder="Search student name..." style="max-width: 250px;">
+                        <button class="btn btn-primary btn-sm rounded px-3">
+                            <i class="bi bi-person-plus-fill me-1"></i> Add Student
+                        </button>
+                    </div>
+                </div>
+
+                <ul class="nav nav-pills mb-4" id="hostelTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="h1-tab" data-bs-toggle="pill" data-bs-target="#hostel1" type="button" role="tab"><i class="bi bi-building me-1"></i>Hostel 1</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="h2-tab" data-bs-toggle="pill" data-bs-target="#hostel2" type="button" role="tab"><i class="bi bi-building me-1"></i>Hostel 2</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="h3-tab" data-bs-toggle="pill" data-bs-target="#hostel3" type="button" role="tab"><i class="bi bi-building me-1"></i>Hostel 3</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="h4-tab" data-bs-toggle="pill" data-bs-target="#hostel4" type="button" role="tab"><i class="bi bi-building me-1"></i>Hostel 4</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="hostelTabsContent">
+                    
+                    <div class="tab-pane fade show active" id="hostel1" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover border mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Roll & Reg No</th>
+                                        <th>Student Name</th>
+                                        <th>Branch & Sem</th>
+                                        <th>Session</th> <th>Room No</th>
+                                        <th>Status</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>GWP2401</strong><br><small class="text-muted">Reg: 2410532001</small></td>
+                                        <td>Divya Kumari</td>
+                                        <td>CSE / 4th Sem</td>
+                                        <td><span class="badge bg-light text-dark border">2024-27</span></td>
+                                        <td><span class="badge bg-secondary">102-A</span></td>
+                                        <td><span class="badge status-in rounded-pill px-3 py-1.5">Inside Hostel</span></td>
+                                        <td class="text-center"><button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Profile</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="hostel2" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover border mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Roll & Reg No</th>
+                                        <th>Student Name</th>
+                                        <th>Branch & Sem</th>
+                                        <th>Session</th>
+                                        <th>Room No</th>
+                                        <th>Status</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>GWP2415</strong><br><small class="text-muted">Reg: 2410532015</small></td>
+                                        <td>Anjali Singh</td>
+                                        <td>ECE / 6th Sem</td>
+                                        <td><span class="badge bg-light text-dark border">2024-27</span></td>
+                                        <td><span class="badge bg-secondary">205-B</span></td>
+                                        <td><span class="badge status-out rounded-pill px-3 py-1.5">On Leave</span></td>
+                                        <td class="text-center"><button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Profile</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="hostel3" role="tabpanel">
+                        <div class="p-4 text-center text-muted">
+                            <i class="bi bi-folder-x display-4 d-block mb-2"></i> No records found for selected Session in Hostel 3.
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="hostel4" role="tabpanel">
+                        <div class="p-4 text-center text-muted">
+                            <i class="bi bi-folder-x display-4 d-block mb-2"></i> No records found for selected Session in Hostel 4.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

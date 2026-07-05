@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile - Hostel Escape</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Fixed Background Image */
+        .bg-image {
+            background-image: url('1000137540.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Dark blue overlay tint */
+        .overlay {
+            min-height: 100vh;
+            width: 100%;
+            background-color: rgba(0, 20, 50, 0.45); 
+            padding: 40px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Premium White Profile Box */
+        .profile-container {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Photo Display & Avatar Section */
+        .avatar-section {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 20px;
+        }
+
+        /* ════════════ DYNAMIC PHOTO FRAME DESIGN START ════════════ */
+        .student-photo-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            padding: 4px;
+            border: 3px solid #0d6efd;
+            background: white;
+            box-shadow: 0 6px 20px rgba(13, 110, 253, 0.2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .student-photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Photo stretch nahi hogi, automatic round fill karegi */
+            border-radius: 50%;
+        }
+
+        /* Agar photo link kaam nahi karega toh yeh default fallback icon dikhega */
+        .default-avatar-icon {
+            font-size: 70px;
+            color: #a0aec0;
+        }
+        /* ════════════ DYNAMIC PHOTO FRAME DESIGN END ════════════ */
+
+        .list-group-item {
+            padding: 12px 15px;
+            border-color: #f1f3f5;
+            background: transparent;
+            font-size: 14.5px;
+        }
+
+        .field-label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .field-value {
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .btn-back {
+            border: 2px solid #0d6efd;
+            color: #0d6efd;
+            font-weight: 600;
+            border-radius: 25px;
+            padding: 10px 25px;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-back:hover {
+            background-color: #0d6efd;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image"></div>
+
+    <div class="overlay">
+        <div class="profile-container">
+            
+            <div class="avatar-section">
+                
+                <div class="student-photo-container">
+                    <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Divya" alt="Student Profile Picture">
+                </div>
+
+                <h3 class="fw-bold text-dark mb-0">Divya Kumari</h3>
+                <span class="badge bg-primary rounded-pill px-3 mt-2">Hostel Resident</span>
+            </div>
+
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-bookmark-star text-primary me-2"></i>Branch</span>
+                    <span class="field-value">Computer Science Engg.</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-hash text-primary me-2"></i>Roll Number</span>
+                    <span class="field-value">24CSE102</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-card-text text-primary me-2"></i>Registration No.</span>
+                    <span class="field-value">GWP2401</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-calendar3 text-primary me-2"></i>Session</span>
+                    <span class="field-value">2024-27</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-layers text-primary me-2"></i>Semester</span>
+                    <span class="field-value">4th Semester</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-door-open text-primary me-2"></i>Room Number</span>
+                    <span class="field-value"><span class="badge bg-secondary">102-A</span></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-phone text-primary me-2"></i>Mobile Number</span>
+                    <span class="field-value">9876543210</span>
+                </li>
+                
+                <!-- NEW PARENT DETAILS ADDED HERE -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-person-heart text-primary me-2"></i>Parent / Guardian</span>
+                    <span class="field-value" id="parentName">Shashi Bhushan Choudhary</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="field-label"><i class="bi bi-telephone-forward text-primary me-2"></i>Parent Mobile</span>
+                    <span class="field-value text-info fw-semibold" id="parentMobile">91XXXXXX89</span>
+                </li>
+            </ul>
+
+            <div class="text-center mt-2">
+                <a href="dashboard.html" class="btn-back shadow-sm">
+                    <i class="bi bi-arrow-left-circle-fill"></i> Back to Dashboard
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- प्रोफाइल डेटा लोड करने की स्क्रिप्ट -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ब्राउज़र की मेमोरी से लॉगिन यूजर का डेटा निकालना
+    const storedProfile = localStorage.getItem('userProfile');
+
+    if (storedProfile) {
+        const user = JSON.parse(storedProfile);
+
+        // HTML के सभी फिक्स डेटा को लॉगिन करने वाले यूजर के डेटा से बदलना
+        if (document.getElementById('profName')) document.getElementById('profName').textContent = user.fullName;
+        if (document.getElementById('profBranch')) document.getElementById('profBranch').textContent = user.branch;
+        if (document.getElementById('profRoll')) document.getElementById('profRoll').textContent = user.rollNo;
+        if (document.getElementById('profReg')) document.getElementById('profReg').textContent = user.regNo;
+        if (document.getElementById('profSession')) document.getElementById('profSession').textContent = user.session;
+        if (document.getElementById('profSem')) document.getElementById('profSem').textContent = user.semester;
+        if (document.getElementById('profRoom')) document.getElementById('profRoom').textContent = user.roomNo;
+        if (document.getElementById('profMobile')) document.getElementById('profMobile').textContent = user.mobile;
+        if (document.getElementById('profParent')) document.getElementById('profParent').textContent = user.parent;
+    }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ब्राउज़र की मेमोरी से लॉगिन यूजर का डेटा निकालना
+    const storedProfile = localStorage.getItem('userProfile');
+
+    if (storedProfile) {
+        const user = JSON.parse(storedProfile);
+
+        // 1. मुख्य नाम और हेडिंग को बदलना
+        const headings = document.querySelectorAll('h2, h3, h1');
+        headings.forEach(h => {
+            if (h.textContent.includes("Divya") || h.textContent.includes("Kumari")) {
+                h.textContent = user.fullName;
+            }
+        });
+
+        // 2. पूरे पेज पर जहाँ भी पुरानी डिटेल्स हैं, उन्हें नए डेटा से बदलना
+        const allElements = document.querySelectorAll('p, span, td, div, li');
+        allElements.forEach(el => {
+            if (el.children.length === 0) { // केवल उन्हीं एलिमेंट्स को बदलें जिनमें सीधा टेक्स्ट है
+                if (el.textContent.includes("24CSE102")) el.textContent = user.rollNo;
+                if (el.textContent.includes("GWP2401")) el.textContent = user.regNo;
+                if (el.textContent.includes("Computer Science")) el.textContent = user.branch;
+                if (el.textContent.includes("102-A")) el.textContent = user.roomNo;
+                if (el.textContent.includes("9876543210")) el.textContent = user.mobile;
+                if (el.textContent.includes("Shashi Bhushan")) el.textContent = user.parent;
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

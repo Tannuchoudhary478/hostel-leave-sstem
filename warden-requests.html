@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warden Portal - Leave Requests</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        body, html {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-image: url('1000137540.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .overlay {
+            min-height: 100vh;
+            width: 100%;
+            background-color: rgba(0, 20, 50, 0.45); 
+            padding: 30px 20px;
+        }
+
+        .navbar-custom {
+            background: rgba(0, 28, 68, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px 25px;
+            color: white;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .requests-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .request-card {
+            border-left: 5px solid #ffc107;
+            transition: 0.2s;
+        }
+        
+        .card-approved {
+            border-left: 5px solid #198754 !important;
+        }
+
+        .card-rejected {
+            border-left: 5px solid #dc3545 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay">
+        <div class="container-fluid max-width-container">
+            
+            <div class="navbar-custom d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-shield-lock-fill text-info fs-3 me-2"></i>
+                    <div>
+                        <h5 class="mb-0 fw-bold">Warden Action Panel</h5>
+                        <small class="text-info">Review Student Applications</small>
+                    </div>
+                </div>
+                <div>
+                    <a href="warden-dashboard.html" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="bi bi-arrow-left me-1"></i> Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <div class="requests-container">
+                <h4 class="fw-bold mb-3 text-dark border-bottom pb-2">Incoming Leave Applications</h4>
+                
+                <div id="noRequestsMessage" class="text-center py-5 d-none">
+                    <i class="bi bi-folder2-open display-4 text-muted"></i>
+                    <p class="text-muted fw-semibold mt-2">No pending leave requests found!</p>
+                </div>
+
+                <div id="wardenRequestList" class="d-flex flex-column gap-3">
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderWardenRequests();
+        });
+
+        function renderWardenRequests() {
+            let leaves = JSON.parse(localStorage.getItem('hms_leaves')) || [];
+            let listContainer = document.getElementById('wardenRequestList');
+            let noReqMsg = document.getElementById('noRequestsMessage');
+
+            if (leaves.length === 0) {
+                noReqMsg.classList.remove('d-none');
+                listContainer.innerHTML = "";
+                return;
+            } else {
+                noReqMsg.classList.add('d-none');
+            }
+
+            let htmlContent = "";
+            
+            // Reverse loop taaki nayi request sabse upar dikhe
+            leaves.forEach((leave, index) => {
+                let statusClass = "";
+                if(leave.status === 'Approved') statusClass = "card-approved";
+                if(leave.status === 'Rejected') statusClass = "card-rejected";
+
+                htmlContent += `
+                    <div class="card request-card ${statusClass} p-3 border-0 bg-light shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <div>
+                                <span class="badge bg-secondary mb-2">${leave.id}</span> 
+                                <span class="badge bg-info text-dark mb-2">${leave.type}</span>
+                                <h5 class="fw-bold text-dark mb-1">${leave.purpose}</h5>
+                                <p class="mb-0 text-muted small">
+                                    <i class="bi bi-calendar-event"></i> <b>Duration:</b> ${leave.startDate} to ${leave.returnDate} | 
+                                    <i class="bi bi-clock"></i> <b>Curfew In-Time:</b> ${leave.returnTime}
+                                </p>
+                            </div>
+                            
+                            <div class="d-flex gap-2">
+                                ${leave.status === 'Pending' ? `
+                                    <button class="btn btn-success btn-sm rounded-pill px-3" onclick="updateStatus(${index}, 'Approved')">
+                                        <i class="bi bi-check-lg"></i> Approve
+                                    </button>
+                                    <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="updateStatus(${index}, 'Rejected')">
+                                        <i class="bi bi-x-lg"></i> Reject
+                                    </button>
+                                ` : `
+                                    <span class="fw-bold text-uppercase small text-${leave.status === 'Approved' ? 'success' : 'danger'}">
+                                        ${leave.status}
+                                    </span>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            listContainer.innerHTML = htmlContent;
+        }
+
+        // Action Logic: Click karne par status localstorage me badal jayega
+        function updateStatus(index, newStatus) {
+            let leaves = JSON.parse(localStorage.getItem('hms_leaves')) || [];
+            leaves[index].status = newStatus;
+            localStorage.setItem('hms_leaves', JSON.stringify(leaves));
+            
+            alert(`Application has been successfully ${newStatus}!`);
+            renderWardenRequests(); // Refresh the list view
+        }
+    </script>
+</body>
+</html>
